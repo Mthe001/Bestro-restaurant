@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import Footer from "../shared/Footer";
 import Lenis from "@studio-freight/lenis";
+import Navbar from "../shared/Navbar";
 
 const MainLayout = () => {
     useEffect(() => {
@@ -28,6 +29,9 @@ const MainLayout = () => {
 
     return (
         <div>
+            <section>
+                <Navbar />
+            </section>
             {/* Smooth Scroll Container */}
             <section className="min-h-screen">
                 <Outlet />
