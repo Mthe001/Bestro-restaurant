@@ -18,9 +18,9 @@ lerna-debug.log*
  yarn.lock
  .pnp.*
  package.json
-dist
-dist-ssr
-*.local
+ dist
+ dist-ssr
+ *.local
 
 # Editor directories and files
 .vscode/*
