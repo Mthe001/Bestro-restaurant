@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { FaShoppingCart, FaSignInAlt, FaUserPlus } from 'react-icons/fa';
 import useTheme from '../Hook/useTheme';
 
@@ -11,9 +11,9 @@ const Navbar = () => {
             <div className="container mx-auto px-4">
                 <div className="flex justify-between items-center py-4">
                     {/* Brand Logo / Name */}
-                    <div className="text-2xl font-bold text-gray-800 dark:text-white">
+                    <Link to="/" className="btn btn-ghost text-2xl font-bold text-gray-800 dark:text-white">
                         Bistro/<span className="text-yellow-500">Boss</span>
-                    </div>
+                    </Link>
 
                     {/* Links for Desktop */}
                     <div className="hidden md:flex space-x-6 text-gray-900 dark:text-white">
