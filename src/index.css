@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Add transition to links for smoother hover effect */
+nav a {
+    transition: color 0.3s ease-in-out;
+}
