@@ -28,7 +28,7 @@ const MainLayout = () => {
     }, []);
 
     return (
-        <div>
+        <div className="bg-white dark:bg-zinc-900">
             <section>
                 <Navbar />
             </section>

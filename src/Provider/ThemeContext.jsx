@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
 
 // Create the Theme Context
 const ThemeContext = createContext();
@@ -8,9 +8,13 @@ export const ThemeProvider = ({ children }) => {
     // State to manage the current theme (default is 'light')
     const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
 
-    // Update the `data-theme` attribute in the `html` tag when theme changes
+    // Update the `dark` class on the `html` element when theme changes
     useEffect(() => {
-        document.documentElement.setAttribute('data-theme', theme);
+        if (theme === 'dark') {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
         localStorage.setItem('theme', theme); // Save theme to localStorage
     }, [theme]);
 
@@ -25,8 +29,5 @@ export const ThemeProvider = ({ children }) => {
         </ThemeContext.Provider>
     );
 };
-
-// Custom Hook to use Theme Context
-export const useTheme = () => useContext(ThemeContext);
 
 export default ThemeContext;
