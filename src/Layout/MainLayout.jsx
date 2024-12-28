@@ -1,24 +1,3 @@
-// import { Outlet } from "react-router-dom";
-// import Footer from "../shared/Footer";
-
-
-// const MainLayout = () => {
-//     return (
-//         <div>
-//             <section className="min-h-screen">
-//                 <Outlet />
-//             </section>
-//             <Footer />
-//         </div>
-//     );
-// };
-
-// export default MainLayout;
-
-
-
-
-
 import React, { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import Footer from "../shared/Footer";
