@@ -5,10 +5,10 @@
 }
 
 .swiper-pagination-bullet {
-  background-color: #007bff;
+  background-color: yellow;
   opacity: 1;
 }
 
 .swiper-pagination-bullet-active {
-  background-color: #0056b3;
+  background-color: orange;
 }
