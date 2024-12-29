@@ -10,9 +10,7 @@ import { ThemeProvider } from './Provider/ThemeContext'; // Import the ThemeProv
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ThemeProvider> {/* Use ThemeProvider instead of ThemeContext.Provider */}
-      <div className='max-w-screen-2xl mx-auto'>
-        <RouterProvider router={router} />
-      </div>
+      <RouterProvider router={router} />
     </ThemeProvider>
   </StrictMode>
 );
