@@ -5,7 +5,7 @@ const Header = () => {
     return (
         <div>
             <div className='text-center'>
-                <h1 className='italic text-xl  text-yellow-400 '>--From 11:00am to 10:00pm--</h1>
+                <h1 className='italic md:text-xl text-sm  lg:text-2xl   text-yellow-400 '>--From 11:00am to 10:00pm--</h1>
 
                 <div>
                     <div className='divider divider-warning w-[25%] mx-auto'></div>
