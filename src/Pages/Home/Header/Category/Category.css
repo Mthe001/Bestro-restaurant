@@ -1,0 +1,14 @@
+.mySwiper {
+  width: 100%;
+  height: auto;
+  padding: 20px 0;
+}
+
+.swiper-pagination-bullet {
+  background-color: #007bff;
+  opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #0056b3;
+}
