@@ -9,7 +9,7 @@ const Header = () => {
 
                 <div>
                     <div className='divider divider-warning w-[25%] mx-auto'></div>
-                    <div className='italic lg:text-4xl md:text-3xl text-lg'>
+                    <div className='italic font-sm dark:text-orange-600 text-black lg:text-4xl md:text-3xl text-lg'>
                         Order Online
                     </div>
                     <div className='divider divider-warning w-[25%] mx-auto'></div>
