@@ -10,6 +10,7 @@ Welcome to the **Bistro Restaurant Website** repository! This project is a moder
 - **Smooth Animations**: Delightful transitions and effects to enhance user experience.
 - **Easy Navigation**: User-friendly layout for seamless browsing.
 - **ESLint Configured**: Ensures clean and consistent code quality.
+- Menu-Feature-implement
 
 ## 🛠️ Technologies Used
 
