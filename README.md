@@ -16,7 +16,6 @@ Follow these steps to set up the project local
 
 - **Node.js**: Ensure Node.js is installed on your syst
 - **npm** or **yarn**: Package manager for installing dependencies.
-
 ### Installatio
 
 1. Clone the repository:
