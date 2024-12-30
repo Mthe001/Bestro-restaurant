@@ -7,7 +7,6 @@ Welcome to the **Bistro Restaurant Website** repository! This project is a moder
 - **Smooth Animations**: Delightful transitions for an elegan
 - **Easy Navigation**: User-friendly layout and n
 - **ESLint Configured**: Ensures clean and consist
-
 ## 🛠️ Tech St
 - **React**: Frontend library for building dynamic user interfa
 - **Vite**: Next-generation frontend tooling for blazing-fast performance
