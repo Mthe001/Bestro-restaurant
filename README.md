@@ -15,7 +15,7 @@ Follow these steps to set up the project local
 ### Prerequisite
 - **Node.js**: Ensure Node.js is installed on your sys
 - **npm** or **yarn**: Package manager for installing dependencies.
-### Installati
+### Installat
 
 1. Clone the repository
    ```bash
