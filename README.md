@@ -13,7 +13,7 @@ Welcome to the **Bistro Restaurant Website** repository! This project is a moder
 - **Vite**: Next-generation frontend tooling for blazing-fast performance
 --
 
-## 📦 Getting Started
+## 📦 Getting Star
 
 Follow these steps to set up the project locally:
 
