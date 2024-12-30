@@ -13,7 +13,7 @@ Welcome to the **Bistro Restaurant Website** repository! This project is a moder
 ## 📦 Getting Sta
 Follow these steps to set up the project loc
 ### Prerequisit
-- **Node.js**: Ensure Node.js is installed on your 
+- **Node.js**: Ensure Node.js is installed on you
 - **npm** or **yarn**: Package manager for installing dependencies
 ### Installa
 
