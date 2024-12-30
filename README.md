@@ -12,7 +12,7 @@ Welcome to the **Bistro Restaurant Website** repository! This project is a moder
 - **Vite**: Next-generation frontend tooling for blazing-fast performance
 ## 📦 Getting Star
 
-Follow these steps to set up the project locall
+Follow these steps to set up the project local
 ### Prerequisites
 
 - **Node.js**: Ensure Node.js is installed on your syst
