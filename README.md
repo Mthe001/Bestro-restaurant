@@ -10,7 +10,6 @@ Welcome to the **Bistro Restaurant Website** repository! This project is a moder
 - **ESLint Configured**: Ensures clean and consistent code.
 
 ---
-
 ## 🛠️ Tech Stack
 
 - **React**: Frontend library for building dynamic user interfaces.
