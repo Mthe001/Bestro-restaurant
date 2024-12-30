@@ -20,7 +20,7 @@ const Featured = () => {
                 <div className="space-y-4 text-center md:text-left">
                     <p className="text-red-500">Aug 20, 2025</p>
                     <p className="uppercase text-orange-200 font-bold">Where Can I Get Some?</p>
-                    <p className="text-orange-600">
+                    <p className="text-stone-200">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita
                         exercitationem voluptatibus nemo sapiente dicta ullam modi aspernatur
                         dignissimos quas porro?
