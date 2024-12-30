@@ -133,7 +133,7 @@ const Navbar = () => {
                     </div>
 
                     {/* Hamburger Menu for Mobile */}
-                    <div className="md:hidden">
+                    <div className="md:hidden z-50">
                         <div className="dropdown dropdown-end">
                             <label tabIndex={0} className="btn btn-ghost text-gray-900 dark:text-white">
                                 <svg
