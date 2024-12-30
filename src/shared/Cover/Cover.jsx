@@ -1,24 +1,32 @@
 import React from 'react';
+import { Parallax } from 'react-parallax';
 
-const Cover = () => {
+
+const Cover = ({ img, title, description }) => {
     return (
-        <div
-            className="hero  h-[350px] lg:h-[550px] md:h-[450px]"
-            style={{
-                backgroundImage: "url(https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp)",
-            }}>
-            <div className="hero-overlay bg-opacity-60"></div>
-            <div className="hero-content text-neutral-content text-center">
-                <div className="max-w-md">
-                    <h1 className="mb-5 text-5xl font-bold">Hello there</h1>
-                    <p className="mb-5">
-                        Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
-                        quasi. In deleniti eaque aut repudiandae et a id nisi.
-                    </p>
-                    <button className="btn btn-primary">Get Started</button>
+
+        <Parallax
+            blur={{ min: -40, max: 40 }}
+            bgImage={img}
+            bgImageAlt='the background image'
+            strength={-200}
+        >
+
+            <div
+                className="hero  h-[350px] lg:h-[550px] md:h-[450px]">
+                <div className="hero-overlay bg-opacity-60"></div>
+                <div className="hero-content text-neutral-content text-center">
+                    <div className="max-w-md">
+                        <h1 className="mb-5 lg:text-5xl md:text-3xl text-2xl text-yellow-400 dark:text-orange-500 font-bold">{title}</h1>
+                        <p className="mb-5 dark:text-yellow-400  text-orange-500">
+                            {description}
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
+        </Parallax>
+
+
     );
 };
 
