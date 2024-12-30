@@ -11,7 +11,6 @@ Welcome to the **Bistro Restaurant Website** repository! This project is a moder
 - **React**: Frontend library for building dynamic user interfa
 - **Vite**: Next-generation frontend tooling for blazing-fast performance
 ## 📦 Getting Star
-
 Follow these steps to set up the project local
 ### Prerequisites
 
