@@ -14,7 +14,6 @@ Welcome to the **Bistro Restaurant Website** repository! This project is a moder
 ## 📦 Getting Star
 
 Follow these steps to set up the project locall
-
 ### Prerequisites
 
 - **Node.js**: Ensure Node.js is installed on your system
