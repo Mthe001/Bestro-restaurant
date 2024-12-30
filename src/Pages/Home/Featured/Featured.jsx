@@ -11,7 +11,7 @@ const Featured = () => {
                 heading={'Featured Item'}
             >
             </SectionTitle>
-            <div className="flex flex-col md:flex-row justify-center bg-slate-700 bg-opacity-40 items-center py-8 px-5 md:px-20 gap-8">
+            <div className="flex flex-col md:flex-row justify-center bg-slate-700 w-[85%] mx-auto rounded-lg bg-opacity-40 items-center py-8 px-5 md:px-20 gap-8">
                 {/* Image Section */}
                 <div className="flex justify-center">
                     <img className="w-[70%] rounded-lg shadow" src={featuredImg} alt="featured" />
