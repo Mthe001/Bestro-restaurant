@@ -9,7 +9,6 @@ const Header = () => {
                 <SectionTitle
                     subHeading={'-- From 11:00am to 10:00pm --'}
                     heading={"Order Online"}>
-
                 </SectionTitle>
             </section>
 
