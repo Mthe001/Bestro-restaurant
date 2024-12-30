@@ -1,5 +1,4 @@
-# Bistro Restaurant Website
-
+# Bistro Restaurant Websit
 Welcome to the **Bistro Restaurant Website** repository! This project is a modern, responsive website built with **React** and powered by **Vite** for fast development and performance. The website is designed to showcase your bistro’s menu, ambiance, and services while providing an exceptional user experience.
 
 
