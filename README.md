@@ -64,7 +64,7 @@ Your website will be live at [http://localhost:5173](http://localhost:5173).
 
 ### Build for Production
 
-To create an optimized production build:
+To create an optimized production build
 ```bash
 npm run build
 # or
