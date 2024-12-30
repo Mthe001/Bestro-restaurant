@@ -4,7 +4,7 @@ Welcome to the **Bistro Restaurant Website** repository! This project is a moder
 
 ---
 
-## 🚀 Featu
+## 🚀 Fea
 - **Fast and Modern Framework**: Built with React and Vite for optimized speed and development.
 - **Responsive Design**: Seamlessly adapts to devices of all sizes – desktop, tablet, and mobil
 - **Dynamic Menu Showcase**: Interactive and visually appealing menu la
