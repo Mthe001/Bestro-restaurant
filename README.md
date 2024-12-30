@@ -6,7 +6,7 @@ Welcome to the **Bistro Restaurant Website** repository! This project is a moder
 - **Dynamic Menu Showcase**: Interactive and visually appealing men
 - **Smooth Animations**: Delightful transitions for an elegant us
 - **Easy Navigation**: User-friendly layout and na
-- **ESLint Configured**: Ensures clean and consistent c
+- **ESLint Configured**: Ensures clean and consistent
   
 ## 🛠️ Tech Sta
 - **React**: Frontend library for building dynamic user interfac
