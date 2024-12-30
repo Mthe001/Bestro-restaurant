@@ -1,0 +1,27 @@
+/* In your Featured.css or global stylesheet */
+.embla {
+  overflow: hidden;
+}
+
+.embla__container {
+  display: flex;
+}
+
+.embla__slide {
+  flex: 0 0 auto;
+  width: 100%;
+  margin-right: 16px;
+  /* Add spacing between slides */
+}
+
+@media (min-width: 640px) {
+  .embla__slide {
+    width: 48%; /* 2 slides per view on medium screens */
+  }
+}
+
+@media (min-width: 1024px) {
+  .embla__slide {
+    width: 30%; /* 3 slides per view on large screens */
+  }
+}
