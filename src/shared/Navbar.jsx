@@ -34,12 +34,12 @@ const Navbar = () => {
                             Menu
                         </NavLink>
                         <NavLink
-                            to="/shop"
+                            to="/order"
                             className={({ isActive }) =>
                                 isActive ? 'text-yellow-500 underline' : 'hover:text-yellow-500'
                             }
                         >
-                            Shop
+                            Order
                         </NavLink>
                         <NavLink
                             to="/dashboard"
@@ -166,8 +166,8 @@ const Navbar = () => {
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to="/shop" className="hover:text-yellow-500">
-                                        Shop
+                                    <NavLink to="/order" className="hover:text-yellow-500">
+                                        Order
                                     </NavLink>
                                 </li>
                                 <li>
