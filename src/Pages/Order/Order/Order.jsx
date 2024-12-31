@@ -4,8 +4,18 @@ import Cover from '../../../shared/Cover/Cover';
 import { Helmet } from 'react-helmet-async';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
+import useMenu from '../../../Hook/useMenu';
+import FoodCard from '../../../components/FoodCard/FoodCard';
+import OrderTab from '../OrderTab/OrderTab';
 
 const Order = () => {
+    const [menu] = useMenu();
+    const dessert = menu.filter(item => item.category === 'dessert');
+    const soup = menu.filter(item => item.category === 'soup');
+    const salad = menu.filter(item => item.category === 'salad');
+    const offered = menu.filter(item => item.category === 'offered');
+    const pizza = menu.filter(item => item.category === 'pizza');
+    const drinks = menu.filter(item => item.category === 'drinks');
     return (
         <div>
             <Helmet>
@@ -54,39 +64,19 @@ const Order = () => {
 
                     {/* Tab Panels */}
                     <TabPanel>
-                        <div className="mt-4 px-4 md:px-8">
-                            <h2 className="text-lg md:text-xl font-semibold">Salads</h2>
-                            <p className="mt-2 text-sm md:text-base">
-                                Fresh and healthy salads made with the finest ingredients. Try our Caesar Salad, Greek Salad, and more!
-                            </p>
-                        </div>
+                        <OrderTab items={salad}></OrderTab>
                     </TabPanel>
 
                     <TabPanel>
-                        <div className="mt-4 px-4 md:px-8">
-                            <h2 className="text-lg md:text-xl font-semibold">Pizza</h2>
-                            <p className="mt-2 text-sm md:text-base">
-                                Delicious pizzas with a variety of toppings. From Margherita to Pepperoni, we’ve got you covered!
-                            </p>
-                        </div>
+                        <OrderTab items={pizza}></OrderTab>
                     </TabPanel>
 
                     <TabPanel>
-                        <div className="mt-4 px-4 md:px-8">
-                            <h2 className="text-lg md:text-xl font-semibold">Soup</h2>
-                            <p className="mt-2 text-sm md:text-base">
-                                Warm and comforting soups perfect for any meal. Try our Tomato Soup, Chicken Soup, and more!
-                            </p>
-                        </div>
+                        <OrderTab items={soup}></OrderTab>
                     </TabPanel>
 
                     <TabPanel>
-                        <div className="mt-4 px-4 md:px-8">
-                            <h2 className="text-lg md:text-xl font-semibold">Drinks</h2>
-                            <p className="mt-2 text-sm md:text-base">
-                                Quench your thirst with our selection of drinks. From smoothies to soft drinks, there’s something for everyone!
-                            </p>
-                        </div>
+                        <OrderTab items={drinks}></OrderTab>
                     </TabPanel>
                 </Tabs>
             </div>
