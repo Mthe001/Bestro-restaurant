@@ -7,7 +7,7 @@ const Navbar = () => {
     const { theme, toggleTheme } = useTheme(); // Use the theme state and toggle function from the custom hook
 
     return (
-        <nav className="bg-slate-600 bg-opacity-30 fixed z-50 flex w-full">
+        <nav className="bg-cyan-500 bg-opacity-20 fixed z-50 flex w-full">
             <div className="container mx-auto px-4">
                 <div className="flex justify-between items-center py-4">
                     {/* Brand Logo / Name */}
