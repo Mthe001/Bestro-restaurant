@@ -44,7 +44,7 @@ const Menu = () => {
             <section className='my-10'>
                 <MenuCategory
                     items={dessert}
-                    title='Heavenly Desserts'
+                    title='dessert'
                     desc={'Indulge in our selection of delightful desserts, crafted to satisfy your sweet cravings. Perfect for a sweet finish to your meal!'}
                     coverImg={desertImg}
                 ></MenuCategory>
@@ -54,7 +54,7 @@ const Menu = () => {
             <section className='my-10'>
                 <MenuCategory
                     items={pizza}
-                    title='Artisan Pizzas'
+                    title='pizza'
                     desc={'Savor the taste of our freshly baked pizzas, topped with premium ingredients and bursting with flavor in every bite.'}
                     coverImg={pizzaImg}
                 ></MenuCategory>
@@ -64,7 +64,7 @@ const Menu = () => {
             <section className='my-10'>
                 <MenuCategory
                     items={salad}
-                    title='Fresh & Vibrant Salads'
+                    title='salad'
                     desc={'Discover our vibrant salads, made with the freshest ingredients to deliver a healthy and refreshing dining experience.'}
                     coverImg={saladImg}
                 ></MenuCategory>
@@ -74,7 +74,7 @@ const Menu = () => {
             <section className='my-10'>
                 <MenuCategory
                     items={soup}
-                    title='Soul-Warming Soups'
+                    title='soup'
                     desc={'Enjoy our comforting soups, carefully prepared to warm your soul and delight your taste buds.'}
                     coverImg={soupImg}
                 ></MenuCategory>
@@ -84,7 +84,7 @@ const Menu = () => {
             <section className='my-10'>
                 <MenuCategory
                     items={drinks}
-                    title='Soul-Warming Soups'
+                    title='drinks'
                     desc={'Enjoy our comforting soups, carefully prepared to warm your soul and delight your taste buds.'}
                     coverImg={drinksImg}
                 ></MenuCategory>

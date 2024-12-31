@@ -34,7 +34,7 @@ const Navbar = () => {
                             Menu
                         </NavLink>
                         <NavLink
-                            to="/order"
+                            to="/order/salad"
                             className={({ isActive }) =>
                                 isActive ? 'text-yellow-500 underline' : 'hover:text-yellow-500'
                             }
@@ -166,7 +166,7 @@ const Navbar = () => {
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to="/order" className="hover:text-yellow-500">
+                                    <NavLink to="/order/salad" className="hover:text-yellow-500">
                                         Order
                                     </NavLink>
                                 </li>

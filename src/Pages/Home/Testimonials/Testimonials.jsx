@@ -12,7 +12,7 @@ const Testimonials = () => {
 
     useEffect(() => {
         // Assuming reviews.json is structured with the data you provided
-        fetch('reviews.json')
+        fetch('http://localhost:5000/reviews')
             .then(response => response.json())
             .then(data => setReviews(data))
     }, [])
