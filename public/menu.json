@@ -9,9 +9,9 @@
     },
     {
         "_id": "642c155b2c4774f05c36eeb9",
-        "name": "Haddock",
+        "name": "Cocacola",
         "recipe": "Chargrilled fresh tuna steak (served medium rare) on classic Niçoise salad with French beans.",
-        "image": "https://cristianonew.ukrdevs.com/wp-content/uploads/2016/08/product-1-370x247.jpg",
+        "image": "https://images.pexels.com/photos/3819969/pexels-photo-3819969.jpeg?auto=compress&cs=tinysrgb&w=900",
         "category": "drinks",
         "price": 14.7
     },
@@ -169,9 +169,9 @@
     },
     {
         "_id": "642c155b2c4774f05c36eeba",
-        "name": "Haddock",
+        "name": "Lime Juice",
         "recipe": "Chargrilled fresh tuna steak (served medium rare) on classic Niçoise salad with French beans.",
-        "image": "https://cristianonew.ukrdevs.com/wp-content/uploads/2016/08/product-1-370x247.jpg",
+        "image": "https://images.pexels.com/photos/4457153/pexels-photo-4457153.jpeg?auto=compress&cs=tinysrgb&w=900",
         "category": "drinks",
         "price": 14.7
     },

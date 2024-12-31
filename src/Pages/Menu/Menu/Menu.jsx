@@ -6,6 +6,7 @@ import desertImg from '../../../assets/menu/dessert-bg.jpeg'
 import pizzaImg from '../../../assets/menu/pizza-bg.jpg'
 import saladImg from '../../../assets/menu/salad-bg.jpg'
 import soupImg from '../../../assets/menu/soup-bg.jpg'
+import drinksImg from '../../../assets/menu/drink.png.png'
 import useMenu from '../../../Hook/useMenu';
 import SectionTitle from '../../../components/SectionTitle/SectionTitle';
 import MenuCategory from '../MenuCategory/MenuCategory';
@@ -17,6 +18,7 @@ const Menu = () => {
     const salad = menu.filter(item => item.category === 'salad');
     const offered = menu.filter(item => item.category === 'offered');
     const pizza = menu.filter(item => item.category === 'pizza');
+    const drinks = menu.filter(item => item.category === 'drinks');
     return (
         <div>
             <Helmet>
@@ -34,8 +36,6 @@ const Menu = () => {
                 {/* offered menu items */}
                 <MenuCategory items={offered}></MenuCategory>
             </section>
-
-
 
 
 
@@ -81,6 +81,14 @@ const Menu = () => {
             </section>
 
 
+            <section className='my-10'>
+                <MenuCategory
+                    items={drinks}
+                    title='Soul-Warming Soups'
+                    desc={'Enjoy our comforting soups, carefully prepared to warm your soul and delight your taste buds.'}
+                    coverImg={drinksImg}
+                ></MenuCategory>
+            </section>
 
 
 
