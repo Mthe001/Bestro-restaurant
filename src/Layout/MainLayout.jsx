@@ -1,10 +1,15 @@
 import React, { useEffect } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Footer from "../shared/Footer";
 import Lenis from "@studio-freight/lenis";
 import Navbar from "../shared/Navbar";
 
 const MainLayout = () => {
+
+    // const location = useLocation();
+    // const noHeaderFooter = location.pathname.includes('login');
+    // const noHeaderFooter2 = location.pathname.includes('register');
+
     useEffect(() => {
         // Initialize Lenis
         const lenis = new Lenis({
@@ -30,12 +35,14 @@ const MainLayout = () => {
     return (
         <div className="bg-white dark:bg-zinc-900">
             <section>
+                {/* {noHeaderFooter || <Navbar />} */}
                 <Navbar />
             </section>
             {/* Smooth Scroll Container */}
             <section className="min-h-screen">
                 <Outlet />
             </section>
+            {/* {noHeaderFooter || <Footer />} */}
             <Footer />
         </div>
     );
