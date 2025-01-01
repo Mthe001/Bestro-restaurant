@@ -1,21 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
-import { useNavigate } from 'react-router-dom';
+import { FcGoogle } from 'react-icons/fc'; // Google Icon
+import { Link, useNavigate } from 'react-router-dom';
 import { LoadCanvasTemplate, loadCaptchaEnginge, validateCaptcha } from 'react-simple-captcha';
 import authImg from '../../assets/others/authentication.gif';
+import { Helmet } from 'react-helmet-async';
+import { Authcontext } from '../../Provider/AuthProvider'; // Import AuthContext
+
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false); // State for toggling password visibility
     const [isChecked, setIsChecked] = useState(false); // State for remember me checkbox
     const [captchaInput, setCaptchaInput] = useState(''); // State for storing captcha input
     const [captchaError, setCaptchaError] = useState(''); // State for showing captcha validation error
     const navigate = useNavigate(); // Initialize the navigate hook
+    const canvasRef = useRef(null); // Reference for the captcha canvas
+
+    // Using the AuthContext
+    const { signInWithEmail, signInWithGoogle, user, loading } = useContext(Authcontext);
 
     useEffect(() => {
-        // Initialize the captcha engine with 6 characters
-        loadCaptchaEnginge(6); // Generates a 6-character captcha
+        // Initialize the captcha engine once the canvas is rendered
+        if (canvasRef.current) {
+            loadCaptchaEnginge(6); // Generates a 6-character captcha
+        }
     }, []); // Empty dependency array ensures it runs only once on component mount
 
-    const handleSubmit = (e) => {
+    const handleEmailLogin = async (e) => {
         e.preventDefault();
         const form = e.target;
         const email = form.email.value;
@@ -32,19 +42,33 @@ const Login = () => {
         setCaptchaInput(''); // Reset the captcha input field
         loadCaptchaEnginge(6); // Reload the captcha with a new value
 
-        console.log('Email:', email);
-        console.log('Password:', password);
-        console.log('Remember Me:', isChecked);
+        try {
+            await signInWithEmail(email, password); // Using the signInWithEmail method from context
+            form.reset(); // Reset the form fields
+            navigate('/'); // Redirect after successful login
+        } catch (error) {
+            console.error('Login failed:', error.message); // Handle any login error
+        }
+    };
 
-        form.reset(); // Reset the form fields
+    const handleGoogleLogin = async () => {
+        try {
+            await signInWithGoogle(); // Using the signInWithGoogle method from context
+            navigate('/'); // Redirect after successful login
+        } catch (error) {
+            console.error('Google login failed:', error.message); // Handle Google login error
+        }
     };
 
     return (
-        <div className="flex flex-col  md:flex-row justify-center items-center min-h-screen bg-zinc-100 dark:bg-zinc-900">
+        <div className="flex flex-col lg:mt-auto md:mt-auto pt-20  md:flex-row justify-center items-center min-h-screen bg-zinc-100 dark:bg-zinc-900">
+            <Helmet>
+                <title>Login | Bestro Boss</title>
+            </Helmet>
             {/* Image Section */}
-            <div className=" md:w-1/2 w-1/2 lg:w-[30%] m-10">
+            <div className="md:w-1/2 w-1/2 lg:w-[30%] m-10">
                 <img
-                    src={authImg} // Replace with your image URL
+                    src={authImg}
                     alt="Login Illustration"
                     className="w-full rounded-lg h-full object-cover"
                 />
@@ -55,7 +79,7 @@ const Login = () => {
                 <h2 className="text-2xl font-semibold text-center text-gray-700 dark:text-gray-200 mb-6">
                     Login to Your Account
                 </h2>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleEmailLogin}>
                     {/* Email */}
                     <div className="mb-4">
                         <label
@@ -118,7 +142,9 @@ const Login = () => {
 
                     {/* Captcha Section */}
                     <div className="mb-4">
-                        <LoadCanvasTemplate /> {/* Captcha canvas */}
+                        <div ref={canvasRef}>
+                            <LoadCanvasTemplate /> {/* Captcha canvas */}
+                        </div>
                         <input
                             type="text"
                             placeholder="Enter captcha"
@@ -150,17 +176,32 @@ const Login = () => {
                     </button>
                 </form>
 
+                {/* Divider */}
+                <div className="flex items-center justify-center my-4">
+                    <hr className="border-gray-300 dark:border-gray-600 w-full" />
+                    <span className="mx-2 text-gray-500 dark:text-gray-400">OR</span>
+                    <hr className="border-gray-300 dark:border-gray-600 w-full" />
+                </div>
+
+                {/* Google Login Button */}
+                <button
+                    onClick={handleGoogleLogin}
+                    className="w-full px-4 py-2 btn dark:btn-outline text-white font-semibold rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 transition-all duration-300 flex items-center justify-center"
+                >
+                    <FcGoogle size={20} className="mr-2" />
+                    Login with Google
+                </button>
+
                 {/* Register Link */}
                 <div className="text-center mt-4">
                     <p className="text-sm text-gray-700 dark:text-gray-300">
                         Don't have an account?{' '}
-                        <a
-                            href="#"
+                        <Link
+                            to="/register"
                             className="text-yellow-400 hover:text-yellow-500 transition-all duration-300"
-                            onClick={() => navigate('/register')} // Navigate to register page
                         >
                             Register
-                        </a>
+                        </Link>
                     </p>
                 </div>
             </div>

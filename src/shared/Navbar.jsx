@@ -1,10 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { FaShoppingCart, FaSignInAlt, FaUserPlus } from 'react-icons/fa';
 import useTheme from '../Hook/useTheme';
+import { Authcontext } from '../Provider/AuthProvider';
+
 
 const Navbar = () => {
     const { theme, toggleTheme } = useTheme(); // Use the theme state and toggle function from the custom hook
+    const { user, logout } = useContext(Authcontext); // Access user and logout from context
+
+    const handleLogOut = async () => {
+        try {
+            await logout();
+        } catch (error) {
+            console.error('Error during logout:', error);
+        }
+    };
 
     return (
         <nav className="bg-cyan-500 bg-opacity-20 fixed z-50 flex w-full">
@@ -55,7 +66,7 @@ const Navbar = () => {
                                 isActive ? 'text-yellow-500 underline' : 'hover:text-yellow-500'
                             }
                         >
-                            Contact Us
+                            Contact
                         </NavLink>
                     </div>
 
@@ -69,24 +80,6 @@ const Navbar = () => {
                             }
                         >
                             <FaShoppingCart size={24} />
-                        </NavLink>
-                        {/* Sign In Icon */}
-                        <NavLink
-                            to="/login"
-                            className={({ isActive }) =>
-                                isActive ? 'text-yellow-500' : 'hover:text-yellow-500'
-                            }
-                        >
-                            <FaSignInAlt size={24} />
-                        </NavLink>
-                        {/* Register Icon */}
-                        <NavLink
-                            to="/register"
-                            className={({ isActive }) =>
-                                isActive ? 'text-yellow-500' : 'hover:text-yellow-500'
-                            }
-                        >
-                            <FaUserPlus size={24} />
                         </NavLink>
 
                         {/* Theme Toggle using custom input */}
@@ -130,6 +123,55 @@ const Navbar = () => {
                                 <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                             </svg>
                         </label>
+
+                        {/* User Authentication Links */}
+                        {!user ? (
+                            <div className="flex gap-4">
+                                <NavLink to="/login" className="btn btn-sm btn-ghost flex items-center gap-2">
+                                    <FaSignInAlt />
+                                </NavLink>
+                                <NavLink to="/register" className="btn btn-sm btn-ghost flex items-center gap-2">
+                                    <FaUserPlus />
+                                </NavLink>
+                            </div>
+                        ) : (
+                            <div className="dropdown dropdown-end">
+                                <div
+                                    tabIndex={0}
+                                    role="button"
+                                    className="btn btn-ghost btn-circle hover:dark:bg-zinc-950 avatar tooltip tooltip-bottom"
+                                    data-tip={user?.displayName || "No Display Name"}
+                                >
+                                    <div className="w-10 rounded-full">
+                                        <img alt="User Avatar" src={user?.photoURL || "https://via.placeholder.com/150"} />
+                                    </div>
+                                </div>
+                                <ul
+                                    tabIndex={0}
+                                    className="menu menu-sm dropdown-content bg-zinc-500 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+                                >
+                                    <li>
+                                        <NavLink
+                                            to="/profile"
+                                            className={({ isActive }) => (isActive ? 'active-link' : 'inactive-link')}
+                                        >
+                                            Profile
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink
+                                            to="/settings"
+                                            className={({ isActive }) => (isActive ? 'active-link' : 'inactive-link')}
+                                        >
+                                            Settings
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <button onClick={handleLogOut}>Logout</button>
+                                    </li>
+                                </ul>
+                            </div>
+                        )}
                     </div>
 
                     {/* Hamburger Menu for Mobile */}
@@ -177,7 +219,7 @@ const Navbar = () => {
                                 </li>
                                 <li>
                                     <NavLink to="/contact" className="hover:text-yellow-500">
-                                        Contact Us
+                                        Contact
                                     </NavLink>
                                 </li>
                                 <li>
