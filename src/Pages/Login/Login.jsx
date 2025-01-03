@@ -1,22 +1,25 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
-import { FiEye, FiEyeOff } from 'react-icons/fi';
-import { FcGoogle } from 'react-icons/fc'; // Google Icon
-import { Link, useNavigate } from 'react-router-dom';
-import { LoadCanvasTemplate, loadCaptchaEnginge, validateCaptcha } from 'react-simple-captcha';
-import authImg from '../../assets/others/authentication.gif';
-import { Helmet } from 'react-helmet-async';
-import { Authcontext } from '../../Provider/AuthProvider'; // Import AuthContext
+import React, { useState, useEffect, useRef, useContext } from "react";
+import { FiEye, FiEyeOff } from "react-icons/fi";
+import { FcGoogle } from "react-icons/fc"; // Google Icon
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { LoadCanvasTemplate, loadCaptchaEnginge, validateCaptcha } from "react-simple-captcha";
+import authImg from "../../assets/others/authentication.gif";
+import { Helmet } from "react-helmet-async";
+import { Authcontext } from "../../Provider/AuthProvider"; // Import AuthContext
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false); // State for toggling password visibility
     const [isChecked, setIsChecked] = useState(false); // State for remember me checkbox
-    const [captchaInput, setCaptchaInput] = useState(''); // State for storing captcha input
-    const [captchaError, setCaptchaError] = useState(''); // State for showing captcha validation error
+    const [captchaInput, setCaptchaInput] = useState(""); // State for storing captcha input
+    const [captchaError, setCaptchaError] = useState(""); // State for showing captcha validation error
+    const [errorMessage, setErrorMessage] = useState(""); // State for showing authentication errors
     const navigate = useNavigate(); // Initialize the navigate hook
+    const location = useLocation(); // Initialize location for redirection
     const canvasRef = useRef(null); // Reference for the captcha canvas
 
     // Using the AuthContext
-    const { signInWithEmail, signInWithGoogle, user, loading } = useContext(Authcontext);
+    const { signInWithEmail, signInWithGoogle, loading } = useContext(Authcontext);
+    const from = location.state?.from?.pathname || "/"; // Get the previous location or default to "/"
 
     useEffect(() => {
         // Initialize the captcha engine once the canvas is rendered
@@ -33,38 +36,50 @@ const Login = () => {
 
         // Validate captcha
         if (!validateCaptcha(captchaInput)) {
-            setCaptchaError('Invalid captcha. Please try again.');
+            setCaptchaError("Invalid captcha. Please try again.");
             return;
         }
 
         // Clear captcha error and input on success
-        setCaptchaError(''); // Clear captcha error if valid
-        setCaptchaInput(''); // Reset the captcha input field
+        setCaptchaError(""); // Clear captcha error if valid
+        setCaptchaInput(""); // Reset the captcha input field
         loadCaptchaEnginge(6); // Reload the captcha with a new value
 
         try {
             await signInWithEmail(email, password); // Using the signInWithEmail method from context
             form.reset(); // Reset the form fields
-            navigate('/'); // Redirect after successful login
+            navigate(from, { replace: true }); // Redirect after successful login
         } catch (error) {
-            console.error('Login failed:', error.message); // Handle any login error
+            console.error("Login failed:", error.message); // Log error to console
+            setErrorMessage(error.message); // Display error to the user
         }
     };
 
     const handleGoogleLogin = async () => {
         try {
             await signInWithGoogle(); // Using the signInWithGoogle method from context
-            navigate('/'); // Redirect after successful login
+            navigate(from, { replace: true }); // Redirect after successful login
         } catch (error) {
-            console.error('Google login failed:', error.message); // Handle Google login error
+            console.error("Google login failed:", error.message); // Log error to console
+            setErrorMessage(error.message); // Display error to the user
         }
     };
 
+    // If the authentication context is loading, display a spinner/loader
+    if (loading) {
+        return (
+            <div className="flex justify-center items-center min-h-screen">
+                <div className="spinner border-t-4 border-yellow-400 rounded-full w-12 h-12 animate-spin"></div>
+            </div>
+        );
+    }
+
     return (
-        <div className="flex flex-col lg:mt-auto md:mt-auto pt-20  md:flex-row justify-center items-center min-h-screen bg-zinc-100 dark:bg-zinc-900">
+        <div className="flex flex-col lg:mt-auto md:mt-auto pt-20 md:flex-row justify-center items-center min-h-screen bg-zinc-100 dark:bg-zinc-900">
             <Helmet>
                 <title>Login | Bestro Boss</title>
             </Helmet>
+
             {/* Image Section */}
             <div className="md:w-1/2 w-1/2 lg:w-[30%] m-10">
                 <img
@@ -107,7 +122,7 @@ const Login = () => {
                             Password
                         </label>
                         <input
-                            type={showPassword ? 'text' : 'password'}
+                            type={showPassword ? "text" : "password"}
                             id="password"
                             name="password"
                             className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-100 dark:bg-zinc-700 text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-yellow-400"
@@ -118,6 +133,7 @@ const Login = () => {
                         <div
                             className="absolute top-[52px] right-3 transform -translate-y-1/2 cursor-pointer"
                             onClick={() => setShowPassword(!showPassword)}
+                            aria-label={showPassword ? "Hide password" : "Show password"}
                         >
                             {showPassword ? <FiEyeOff size={18} /> : <FiEye size={18} />}
                         </div>
@@ -167,6 +183,11 @@ const Login = () => {
                         </a>
                     </div>
 
+                    {/* Error Message */}
+                    {errorMessage && (
+                        <p className="text-red-500 text-sm mb-4">{errorMessage}</p>
+                    )}
+
                     {/* Submit Button */}
                     <button
                         type="submit"
@@ -195,7 +216,7 @@ const Login = () => {
                 {/* Register Link */}
                 <div className="text-center mt-4">
                     <p className="text-sm text-gray-700 dark:text-gray-300">
-                        Don't have an account?{' '}
+                        Don't have an account?{" "}
                         <Link
                             to="/register"
                             className="text-yellow-400 hover:text-yellow-500 transition-all duration-300"

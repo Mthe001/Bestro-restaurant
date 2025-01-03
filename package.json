@@ -12,6 +12,8 @@
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
     "@studio-freight/lenis": "^1.0.42",
+    "@tanstack/react-query": "^5.62.11",
+    "axios": "^1.7.9",
     "embla-carousel": "^8.5.1",
     "embla-carousel-react": "^8.5.1",
     "firebase": "^11.1.0",
