@@ -75,7 +75,7 @@ const Navbar = () => {
                     <div className="hidden md:flex items-center space-x-4 text-gray-900 dark:text-white">
                         {/* Cart Icon with Counter */}
                         <NavLink
-                            to="/cart"
+                            to="/dashboard/cart"
                             className={({ isActive }) =>
                                 isActive ? 'relative text-yellow-500' : 'relative hover:text-yellow-500'
                             }
@@ -215,7 +215,7 @@ const Navbar = () => {
                                 <li>
                                     {/* Cart Icon with Counter */}
                                     <NavLink
-                                        to="/cart"
+                                        to="/dashboard/cart"
                                         className={({ isActive }) =>
                                             isActive ? 'relative text-yellow-500' : 'relative hover:text-yellow-500'
                                         }
