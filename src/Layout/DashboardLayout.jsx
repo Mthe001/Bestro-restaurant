@@ -4,6 +4,10 @@ import { FaShoppingCart, FaHome, FaClipboardCheck, FaHistory, FaStar, FaTicketAl
 import useTheme from '../Hook/useTheme';
 
 const DashboardLayout = () => {
+
+    //TODO: get isADmin value from the databse
+    const isAdmin = true;
+
     const [isSidebarOpen, setSidebarOpen] = useState(false); // Sidebar toggle state
     const { theme, toggleTheme } = useTheme(); // Assuming `useTheme` handles dark/light mode
 
@@ -28,74 +32,155 @@ const DashboardLayout = () => {
                 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}
             >
                 <ul className="menu space-y-4">
-                    <li>
-                        <NavLink
-                            to="/dashboard/user-home"
-                            className={({ isActive }) =>
-                                `hover:bg-gray-200 dark:hover:bg-gray-800 p-2 mt-10 lg:mt-auto md:mt-10 rounded-md ${isActive ? 'text-red-700 dark:text-yellow-200' : ''
-                                }`
-                            }
-                        >
-                            <FaHome size={20} /> User Home
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink
-                            to="/dashboard/reservation"
-                            className={({ isActive }) =>
-                                `hover:bg-gray-200 dark:hover:bg-gray-800 p-2 rounded-md ${isActive ? 'text-red-700 dark:text-yellow-200' : ''
-                                }`
-                            }
-                        >
-                            <FaClipboardCheck size={20} /> Reservation
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink
-                            to="/dashboard/payment-history"
-                            className={({ isActive }) =>
-                                `hover:bg-gray-200 dark:hover:bg-gray-800 p-2 rounded-md ${isActive ? 'text-red-700 dark:text-yellow-200' : ''
-                                }`
-                            }
-                        >
-                            <FaHistory size={20} /> Payment History
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink
-                            to="/dashboard/cart"
-                            className={({ isActive }) =>
-                                `hover:bg-gray-200 dark:hover:bg-gray-800 p-2 rounded-md ${isActive ? 'text-red-700 dark:text-yellow-200' : ''
-                                }`
-                            }
-                        >
-                            <FaShoppingCart size={20} /> My Cart
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink
-                            to="/dashboard/add-review"
-                            className={({ isActive }) =>
-                                `hover:bg-gray-200 dark:hover:bg-gray-800 p-2 rounded-md ${isActive ? 'text-red-700 dark:text-yellow-200' : ''
-                                }`
-                            }
-                        >
-                            <FaStar size={20} /> Add Review
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink
-                            to="/dashboard/my-booking"
-                            className={({ isActive }) =>
-                                `hover:bg-gray-200 dark:hover:bg-gray-800 p-2 rounded-md ${isActive ? 'text-red-700 dark:text-yellow-200' : ''
-                                }`
-                            }
-                        >
-                            <FaTicketAlt size={20} /> My Booking
-                        </NavLink>
-                    </li>
+
+                    {
+                        isAdmin ? <>
+
+                            <li>
+                                <NavLink
+                                    to="/dashboard/aminHome"
+                                    className={({ isActive }) =>
+                                        `hover:bg-gray-200 dark:hover:bg-gray-800 p-2 mt-10 lg:mt-auto md:mt-10 rounded-md ${isActive ? 'text-red-700 dark:text-yellow-200' : ''
+                                        }`
+                                    }
+                                >
+                                    <FaHome size={20} /> Admin Dashboard
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
+                                    to="/dashboard/add-items"
+                                    className={({ isActive }) =>
+                                        `hover:bg-gray-200 dark:hover:bg-gray-800 p-2 rounded-md ${isActive ? 'text-red-700 dark:text-yellow-200' : ''
+                                        }`
+                                    }
+                                >
+                                    <FaClipboardCheck size={20} /> Add Items
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
+                                    to="/dashboard/manage-items"
+                                    className={({ isActive }) =>
+                                        `hover:bg-gray-200 dark:hover:bg-gray-800 p-2 rounded-md ${isActive ? 'text-red-700 dark:text-yellow-200' : ''
+                                        }`
+                                    }
+                                >
+                                    <FaHistory size={20} /> Manage Items
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
+                                    to="/dashboard/manage-bookings"
+                                    className={({ isActive }) =>
+                                        `hover:bg-gray-200 dark:hover:bg-gray-800 p-2 rounded-md ${isActive ? 'text-red-700 dark:text-yellow-200' : ''
+                                        }`
+                                    }
+                                >
+                                    <FaShoppingCart size={20} /> Manage Bookings
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
+                                    to="/dashboard/all-users"
+                                    className={({ isActive }) =>
+                                        `hover:bg-gray-200 dark:hover:bg-gray-800 p-2 rounded-md ${isActive ? 'text-red-700 dark:text-yellow-200' : ''
+                                        }`
+                                    }
+                                >
+                                    <FaStar size={20} /> All Users
+                                </NavLink>
+                            </li>
+
+
+
+
+
+
+
+                            {/* is admin true */}
+                        </> :
+
+
+                            <>
+
+                                {/* is admin false */}
+
+                                <li>
+                                    <NavLink
+                                        to="/dashboard/user-home"
+                                        className={({ isActive }) =>
+                                            `hover:bg-gray-200 dark:hover:bg-gray-800 p-2 mt-10 lg:mt-auto md:mt-10 rounded-md ${isActive ? 'text-red-700 dark:text-yellow-200' : ''
+                                            }`
+                                        }
+                                    >
+                                        <FaHome size={20} /> User Home
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink
+                                        to="/dashboard/reservation"
+                                        className={({ isActive }) =>
+                                            `hover:bg-gray-200 dark:hover:bg-gray-800 p-2 rounded-md ${isActive ? 'text-red-700 dark:text-yellow-200' : ''
+                                            }`
+                                        }
+                                    >
+                                        <FaClipboardCheck size={20} /> Reservation
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink
+                                        to="/dashboard/payment-history"
+                                        className={({ isActive }) =>
+                                            `hover:bg-gray-200 dark:hover:bg-gray-800 p-2 rounded-md ${isActive ? 'text-red-700 dark:text-yellow-200' : ''
+                                            }`
+                                        }
+                                    >
+                                        <FaHistory size={20} /> Payment History
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink
+                                        to="/dashboard/cart"
+                                        className={({ isActive }) =>
+                                            `hover:bg-gray-200 dark:hover:bg-gray-800 p-2 rounded-md ${isActive ? 'text-red-700 dark:text-yellow-200' : ''
+                                            }`
+                                        }
+                                    >
+                                        <FaShoppingCart size={20} /> My Cart
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink
+                                        to="/dashboard/add-review"
+                                        className={({ isActive }) =>
+                                            `hover:bg-gray-200 dark:hover:bg-gray-800 p-2 rounded-md ${isActive ? 'text-red-700 dark:text-yellow-200' : ''
+                                            }`
+                                        }
+                                    >
+                                        <FaStar size={20} /> Add Review
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink
+                                        to="/dashboard/my-booking"
+                                        className={({ isActive }) =>
+                                            `hover:bg-gray-200 dark:hover:bg-gray-800 p-2 rounded-md ${isActive ? 'text-red-700 dark:text-yellow-200' : ''
+                                            }`
+                                        }
+                                    >
+                                        <FaTicketAlt size={20} /> My Booking
+                                    </NavLink>
+                                </li>
+                            </>
+                    }
+
                     {/* Divider */}
                     <div className="divider"></div>
+
+
+                    {/* shared navlinks */}
+
                     <li>
                         <NavLink
                             to="/"

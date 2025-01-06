@@ -19,6 +19,7 @@ Welcome to the **Bistro Restaurant Website** repository! This project is a moder
 - **Vite**: Next-generation frontend tooling for blazing-fast performance.
 - **ESLint**: For maintaining code quality and consistency across the project.
 - **CSS/SCSS**: Custom styling for responsive and modern design.
+- **FORK** : edit...
 
 ## 📦 Getting Started
 
