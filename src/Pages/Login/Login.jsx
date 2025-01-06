@@ -6,6 +6,7 @@ import { LoadCanvasTemplate, loadCaptchaEnginge, validateCaptcha } from "react-s
 import authImg from "../../assets/others/authentication.gif";
 import { Helmet } from "react-helmet-async";
 import { Authcontext } from "../../Provider/AuthProvider"; // Import AuthContext
+import SocialLogin from "../../components/SocialLogin/SocilaLogin";
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false); // State for toggling password visibility
@@ -27,6 +28,7 @@ const Login = () => {
             loadCaptchaEnginge(6); // Generates a 6-character captcha
         }
     }, []); // Empty dependency array ensures it runs only once on component mount
+
 
     const handleEmailLogin = async (e) => {
         e.preventDefault();
@@ -55,15 +57,13 @@ const Login = () => {
         }
     };
 
-    const handleGoogleLogin = async () => {
-        try {
-            await signInWithGoogle(); // Using the signInWithGoogle method from context
-            navigate(from, { replace: true }); // Redirect after successful login
-        } catch (error) {
-            console.error("Google login failed:", error.message); // Log error to console
-            setErrorMessage(error.message); // Display error to the user
-        }
-    };
+
+
+
+
+
+
+
 
     // If the authentication context is loading, display a spinner/loader
     if (loading) {
@@ -205,13 +205,7 @@ const Login = () => {
                 </div>
 
                 {/* Google Login Button */}
-                <button
-                    onClick={handleGoogleLogin}
-                    className="w-full px-4 py-2 btn dark:btn-outline text-white font-semibold rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 transition-all duration-300 flex items-center justify-center"
-                >
-                    <FcGoogle size={20} className="mr-2" />
-                    Login with Google
-                </button>
+                <SocialLogin />
 
                 {/* Register Link */}
                 <div className="text-center mt-4">

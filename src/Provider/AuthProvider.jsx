@@ -32,18 +32,32 @@ const AuthProvider = ({ children }) => {
         }
     };
 
+
+
+
+
+
     // Sign in with Google
     const signInWithGoogle = async () => {
-        setLoading(true); // Set loading while processing
-        setError(null); // Clear any previous error
         try {
-            await signInWithPopup(auth, googleProvider);
-        } catch (err) {
-            setError(err.message); // Set error message if any
-        } finally {
-            setLoading(false); // Set loading to false after attempt
+            const googleProvider = new GoogleAuthProvider();
+            const result = await signInWithPopup(auth, googleProvider);
+            console.log("Google Sign-In result:", result); // Log the full result for debugging
+            return result;
+        } catch (error) {
+            console.error("Error in signInWithGoogle:", error);
+            throw error; // Rethrow the error to handle it in the calling function
         }
     };
+
+
+
+
+
+
+
+
+
 
     // Logout user
     const logout = async () => {

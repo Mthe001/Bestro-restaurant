@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { Outlet, NavLink } from 'react-router-dom';
-import { FaShoppingCart, FaHome, FaClipboardCheck, FaHistory, FaStar, FaTicketAlt, FaMoon, FaSun, FaBars } from 'react-icons/fa'; // Add appropriate icons
+import { FaShoppingCart, FaHome, FaClipboardCheck, FaHistory, FaStar, FaTicketAlt, FaMoon, FaSun, FaBars } from 'react-icons/fa'; // Icons
 import useTheme from '../Hook/useTheme';
 
-
 const DashboardLayout = () => {
-    const [isSidebarOpen, setSidebarOpen] = useState(false); // Sidebar is hidden by default on mobile
-    const { theme, toggleTheme } = useTheme(); // Assuming `useTheme` is a custom hook managing dark/light mode
+    const [isSidebarOpen, setSidebarOpen] = useState(false); // Sidebar toggle state
+    const { theme, toggleTheme } = useTheme(); // Assuming `useTheme` handles dark/light mode
 
     // Toggle Sidebar visibility
     const toggleSidebar = () => {
@@ -15,24 +14,25 @@ const DashboardLayout = () => {
 
     return (
         <div className={`flex flex-col lg:flex-row ${theme === 'dark' ? 'bg-zinc-900 text-white' : 'bg-gray-100 text-gray-900'}`}>
-
             {/* Hamburger Menu Icon for Mobile */}
-            <div className="lg:hidden flex items-center p-4" onClick={toggleSidebar}>
+            <div
+                className="lg:hidden fixed top-4 left-4 z-20 flex items-center p-2 bg-orange-400 rounded-full shadow-md cursor-pointer"
+                onClick={toggleSidebar}
+            >
                 <FaBars size={24} className={`${theme === 'dark' ? 'text-white' : 'text-gray-900'}`} />
             </div>
 
             {/* Sidebar */}
-            {/* Sidebar */}
             <div
-                className={`lg:w-64 min-h-screen bg-orange-400 text-gray-900 dark:text-white p-4 transition-all ease-in-out
-                ${isSidebarOpen ? 'block fixed top-0 left-0 right-0 z-10' : 'hidden lg:block'}`}
+                className={`fixed top-0 left-0 z-10 w-64 min-h-screen  bg-orange-400 text-gray-900 dark:text-white p-4 transition-transform duration-300 ease-in-out lg:static lg:translate-x-0
+                ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}
             >
                 <ul className="menu space-y-4">
                     <li>
                         <NavLink
                             to="/dashboard/user-home"
                             className={({ isActive }) =>
-                                `hover:bg-gray-200 dark:hover:bg-gray-800 p-2 rounded-md ${isActive ? 'text-red-700 dark:text-yellow-200' : ''
+                                `hover:bg-gray-200 dark:hover:bg-gray-800 p-2 mt-10 lg:mt-auto md:mt-10 rounded-md ${isActive ? 'text-red-700 dark:text-yellow-200' : ''
                                 }`
                             }
                         >
@@ -156,9 +156,8 @@ const DashboardLayout = () => {
                 </ul>
             </div>
 
-
             {/* Main Content (Outlet) */}
-            <div className="flex-1 p-4 mt-20">
+            <div className="flex-1 p-4 mt-20 min-h-screen">
                 <Outlet />
             </div>
         </div>

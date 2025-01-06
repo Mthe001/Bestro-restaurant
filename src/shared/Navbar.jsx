@@ -4,6 +4,9 @@ import { FaShoppingCart, FaSignInAlt, FaUserPlus } from 'react-icons/fa';
 import useTheme from '../Hook/useTheme';
 import { Authcontext } from '../Provider/AuthProvider';
 import useCart from '../Hook/useCart';
+import './Navbar.css'; // Import the CSS file
+
+
 
 const Navbar = () => {
     const { theme, toggleTheme } = useTheme();
@@ -19,7 +22,7 @@ const Navbar = () => {
     };
 
     return (
-        <nav className="bg-cyan-500 bg-opacity-20 fixed z-50 w-full shadow-md">
+        <nav className="bg-cyan-500 bg-opacity-10 Nav-Bar  fixed z-50 w-full shadow-md">
             <div className="container mx-auto px-4">
                 <div className="flex justify-between items-center py-4">
                     {/* Brand Logo */}

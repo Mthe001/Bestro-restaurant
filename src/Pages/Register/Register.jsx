@@ -8,6 +8,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import Swal from 'sweetalert2';
 import { Authcontext } from '../../Provider/AuthProvider';
+import useAxiosPublic from '../../Hook/useAxiosPublic';
 
 // Validation schema with Yup
 const schema = yup.object().shape({
@@ -27,6 +28,7 @@ const schema = yup.object().shape({
 });
 
 const Register = () => {
+    const axiosPublic = useAxiosPublic();
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const navigate = useNavigate();
@@ -42,25 +44,61 @@ const Register = () => {
         mode: 'onBlur' // Validate fields only onBlur (when user leaves the field)
     });
 
-    // Form submission handler
-    const onSubmit = async (data) => {
-        try {
-            await registerUser(data.email, data.password, data.name, data.photoUrl);
-            Swal.fire({
-                icon: 'success',
-                title: 'Registration Successful!',
-                text: 'You have successfully created an account.',
+
+    const onSubmit = (data) => {
+        const userInfo = {
+            name: data.name,
+            email: data.email,
+            password: data.password, // Ideally, passwords should be hashed in the backend
+            photoUrl: data.photoUrl || null, // Optional field
+        };
+
+        axiosPublic.post('/users', userInfo)
+            .then((response) => {
+                console.log('Server response:', response);
+
+                if (response.status === 201) {
+                    registerUser(data.email, data.password, data.name, data.photoUrl)
+                        .then(() => {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Registration Successful!',
+                                text: 'Your account has been created successfully.',
+                            });
+                            navigate('/'); // Redirect to home or login
+                            reset(); // Clear the form
+                        })
+                        .catch((error) => {
+                            // Handle errors from registerUser
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: error.message || 'Something went wrong while creating your account!',
+                            });
+                        });
+                } else {
+                    throw new Error(`Registration failed: ${response.status} - ${response.data.message || 'Unknown error'}`);
+                }
+            })
+            .catch((error) => {
+                // Handle errors from axiosPublic.post
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: error.message || 'Something went wrong!',
+                });
             });
-            navigate('/');
-            reset(); // Clear the form after successful submission
-        } catch (error) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: error.message || 'Something went wrong!',
-            });
-        }
     };
+
+
+
+
+
+
+
+
+
+
 
     return (
         <div className="flex flex-col lg:mt-auto md:mt-auto pt-20 md:flex-row justify-center items-center min-h-screen bg-zinc-100 dark:bg-zinc-900">
@@ -122,6 +160,27 @@ const Register = () => {
                         />
                         {errors.email && isSubmitted && (
                             <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
+                        )}
+                    </div>
+
+                    {/* Photo URL */}
+                    <div className="mb-4">
+                        <label htmlFor="photoUrl" className="block text-gray-700 dark:text-gray-300 mb-2">
+                            Photo URL
+                        </label>
+                        <Controller
+                            name="photoUrl"
+                            control={control}
+                            render={({ field }) => (
+                                <input
+                                    {...field}
+                                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-100 dark:bg-zinc-700 text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                                    placeholder="Enter a photo URL"
+                                />
+                            )}
+                        />
+                        {errors.photoUrl && isSubmitted && (
+                            <p className="text-red-500 text-sm mt-1">{errors.photoUrl.message}</p>
                         )}
                     </div>
 
@@ -204,3 +263,4 @@ const Register = () => {
 };
 
 export default Register;
+
