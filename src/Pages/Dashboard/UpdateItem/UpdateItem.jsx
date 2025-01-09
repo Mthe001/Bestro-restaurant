@@ -36,10 +36,14 @@ const UpdateItem = () => {
         setIsUploading(true);
 
         try {
-            let imageUrl = data.photoUrl || image; // Default to existing image if no new image is uploaded
+            let imageUrl = image; // Default to existing image
 
-            // If no Photo URL, upload the image file
-            if (!imageUrl && data.image[0]) {
+            // If a new Photo URL is provided, use it directly
+            if (data.photoUrl) {
+                imageUrl = data.photoUrl;
+            }
+            // Otherwise, if an image file is uploaded, upload it to ImgBB
+            else if (data.image[0]) {
                 const formData = new FormData();
                 formData.append('image', data.image[0]);
 
@@ -75,7 +79,7 @@ const UpdateItem = () => {
                 Swal.fire('Error', 'Failed to update menu item', 'error');
             }
         } catch (error) {
-            Swal.fire('Error', 'An unexpected error occurred', 'error');
+            Swal.fire('Error', error.message || 'An unexpected error occurred', 'error');
         } finally {
             setIsUploading(false);
         }

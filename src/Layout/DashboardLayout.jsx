@@ -1,16 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Outlet, NavLink } from 'react-router-dom';
 import { FaShoppingCart, FaHome, FaClipboardCheck, FaHistory, FaStar, FaTicketAlt, FaMoon, FaSun, FaBars } from 'react-icons/fa'; // Icons
 import useTheme from '../Hook/useTheme';
 import useAdmin from '../Hook/useAdmin';
+import Lenis from '@studio-freight/lenis'; // Import Lenis for smooth scrolling
 
 const DashboardLayout = () => {
 
-    //TODO: get isADmin value from the databse
-    const [isAdmin] = useAdmin();
-
+    const [isAdmin] = useAdmin(); // TODO: get isAdmin value from the database
     const [isSidebarOpen, setSidebarOpen] = useState(false); // Sidebar toggle state
     const { theme, toggleTheme } = useTheme(); // Assuming `useTheme` handles dark/light mode
+
+    // Initialize Lenis for smooth scrolling
+    useEffect(() => {
+        const lenis = new Lenis({
+            duration: 1.2, // Adjust duration for scroll speed
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Custom easing function
+            direction: 'vertical', // Scroll direction
+            smooth: true,
+            smoothTouch: true,
+        });
+
+        const scrollFn = (time) => {
+            lenis.raf(time);
+            requestAnimationFrame(scrollFn);
+        };
+
+        requestAnimationFrame(scrollFn);
+
+        // Clean up Lenis instance
+        return () => lenis.destroy();
+    }, []);
 
     // Toggle Sidebar visibility
     const toggleSidebar = () => {
@@ -29,14 +49,13 @@ const DashboardLayout = () => {
 
             {/* Sidebar */}
             <div
-                className={`fixed top-0 left-0 z-10 w-64 min-h-screen  bg-orange-400 text-gray-900 dark:text-white p-4 transition-transform duration-300 ease-in-out lg:static lg:translate-x-0
+                className={`fixed top-0 left-0 z-10 w-64 min-h-screen bg-orange-400 text-gray-900 dark:text-white p-4 transition-transform duration-300 ease-in-out lg:static lg:translate-x-0
                 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}
             >
                 <ul className="menu space-y-4">
-
-                    {
-                        isAdmin ? <>
-
+                    {isAdmin ? (
+                        <>
+                            {/* Admin Dashboard Links */}
                             <li>
                                 <NavLink
                                     to="/dashboard/aminHome"
@@ -92,96 +111,83 @@ const DashboardLayout = () => {
                                     <FaStar size={20} /> Manage Users
                                 </NavLink>
                             </li>
-
-
-
-
-
-
-
-                            {/* is admin true */}
-                        </> :
-
-
-                            <>
-
-                                {/* is admin false */}
-
-                                <li>
-                                    <NavLink
-                                        to="/dashboard/user-home"
-                                        className={({ isActive }) =>
-                                            `hover:bg-gray-200 dark:hover:bg-gray-800 p-2 mt-10 lg:mt-auto md:mt-10 rounded-md ${isActive ? 'text-red-700 dark:text-yellow-200' : ''
-                                            }`
-                                        }
-                                    >
-                                        <FaHome size={20} /> User Home
-                                    </NavLink>
-                                </li>
-                                <li>
-                                    <NavLink
-                                        to="/dashboard/reservation"
-                                        className={({ isActive }) =>
-                                            `hover:bg-gray-200 dark:hover:bg-gray-800 p-2 rounded-md ${isActive ? 'text-red-700 dark:text-yellow-200' : ''
-                                            }`
-                                        }
-                                    >
-                                        <FaClipboardCheck size={20} /> Reservation
-                                    </NavLink>
-                                </li>
-                                <li>
-                                    <NavLink
-                                        to="/dashboard/payment-history"
-                                        className={({ isActive }) =>
-                                            `hover:bg-gray-200 dark:hover:bg-gray-800 p-2 rounded-md ${isActive ? 'text-red-700 dark:text-yellow-200' : ''
-                                            }`
-                                        }
-                                    >
-                                        <FaHistory size={20} /> Payment History
-                                    </NavLink>
-                                </li>
-                                <li>
-                                    <NavLink
-                                        to="/dashboard/cart"
-                                        className={({ isActive }) =>
-                                            `hover:bg-gray-200 dark:hover:bg-gray-800 p-2 rounded-md ${isActive ? 'text-red-700 dark:text-yellow-200' : ''
-                                            }`
-                                        }
-                                    >
-                                        <FaShoppingCart size={20} /> My Cart
-                                    </NavLink>
-                                </li>
-                                <li>
-                                    <NavLink
-                                        to="/dashboard/add-review"
-                                        className={({ isActive }) =>
-                                            `hover:bg-gray-200 dark:hover:bg-gray-800 p-2 rounded-md ${isActive ? 'text-red-700 dark:text-yellow-200' : ''
-                                            }`
-                                        }
-                                    >
-                                        <FaStar size={20} /> Add Review
-                                    </NavLink>
-                                </li>
-                                <li>
-                                    <NavLink
-                                        to="/dashboard/my-booking"
-                                        className={({ isActive }) =>
-                                            `hover:bg-gray-200 dark:hover:bg-gray-800 p-2 rounded-md ${isActive ? 'text-red-700 dark:text-yellow-200' : ''
-                                            }`
-                                        }
-                                    >
-                                        <FaTicketAlt size={20} /> My Booking
-                                    </NavLink>
-                                </li>
-                            </>
-                    }
+                        </>
+                    ) : (
+                        <>
+                            {/* User Dashboard Links */}
+                            <li>
+                                <NavLink
+                                    to="/dashboard/user-home"
+                                    className={({ isActive }) =>
+                                        `hover:bg-gray-200 dark:hover:bg-gray-800 p-2 mt-10 lg:mt-auto md:mt-10 rounded-md ${isActive ? 'text-red-700 dark:text-yellow-200' : ''
+                                        }`
+                                    }
+                                >
+                                    <FaHome size={20} /> User Home
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
+                                    to="/dashboard/reservation"
+                                    className={({ isActive }) =>
+                                        `hover:bg-gray-200 dark:hover:bg-gray-800 p-2 rounded-md ${isActive ? 'text-red-700 dark:text-yellow-200' : ''
+                                        }`
+                                    }
+                                >
+                                    <FaClipboardCheck size={20} /> Reservation
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
+                                    to="/dashboard/payment-history"
+                                    className={({ isActive }) =>
+                                        `hover:bg-gray-200 dark:hover:bg-gray-800 p-2 rounded-md ${isActive ? 'text-red-700 dark:text-yellow-200' : ''
+                                        }`
+                                    }
+                                >
+                                    <FaHistory size={20} /> Payment History
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
+                                    to="/dashboard/cart"
+                                    className={({ isActive }) =>
+                                        `hover:bg-gray-200 dark:hover:bg-gray-800 p-2 rounded-md ${isActive ? 'text-red-700 dark:text-yellow-200' : ''
+                                        }`
+                                    }
+                                >
+                                    <FaShoppingCart size={20} /> My Cart
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
+                                    to="/dashboard/add-review"
+                                    className={({ isActive }) =>
+                                        `hover:bg-gray-200 dark:hover:bg-gray-800 p-2 rounded-md ${isActive ? 'text-red-700 dark:text-yellow-200' : ''
+                                        }`
+                                    }
+                                >
+                                    <FaStar size={20} /> Add Review
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
+                                    to="/dashboard/my-booking"
+                                    className={({ isActive }) =>
+                                        `hover:bg-gray-200 dark:hover:bg-gray-800 p-2 rounded-md ${isActive ? 'text-red-700 dark:text-yellow-200' : ''
+                                        }`
+                                    }
+                                >
+                                    <FaTicketAlt size={20} /> My Booking
+                                </NavLink>
+                            </li>
+                        </>
+                    )}
 
                     {/* Divider */}
                     <div className="divider"></div>
 
-
-                    {/* shared navlinks */}
-
+                    {/* Shared NavLinks */}
                     <li>
                         <NavLink
                             to="/"

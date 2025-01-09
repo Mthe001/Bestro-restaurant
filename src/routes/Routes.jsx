@@ -17,6 +17,7 @@ import AddItems from '../Pages/Dashboard/AddItems/AddItems';
 import AdminRoute from './AdminRoute';
 import ManageItem from '../Pages/Dashboard/ManageItem/ManageItem';
 import UpdateItem from '../Pages/Dashboard/UpdateItem/UpdateItem';
+import Payment from '../Pages/Dashboard/Payment/Payment';
 
 
 
@@ -58,6 +59,10 @@ export const router = createBrowserRouter([
                 element: <PrivateRoutes><Cart /></PrivateRoutes>,
 
             },
+            {
+                path: '/dashboard/reservation',
+                element: <PrivateRoutes><Payment /></PrivateRoutes>,
+            },
 
 
 
@@ -75,7 +80,7 @@ export const router = createBrowserRouter([
                 path: '/dashboard/manage-items',
                 element: <AdminRoute><ManageItem /></AdminRoute>,
             },
-            
+
             {
                 path: '/dashboard/updateItem/:id',
                 element: <AdminRoute> <UpdateItem /></AdminRoute>,

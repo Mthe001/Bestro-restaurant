@@ -2,6 +2,7 @@ import Swal from 'sweetalert2'; // Import SweetAlert2
 import useCart from '../../../Hook/useCart';  // Assuming useCart is a custom hook that fetches cart data
 import { FaTrashAlt } from 'react-icons/fa';
 import useAxiosSecure from '../../../Hook/useAxiosSecure';
+import { Link } from 'react-router-dom';
 
 const Cart = () => {
     const [cart, refetch] = useCart(); // Assuming refetch is part of your custom hook's return value
@@ -55,7 +56,11 @@ const Cart = () => {
                 <h2 className="text-xl md:text-3xl font-semibold">
                     Total Price: <span className="text-orange-400">${totalPrice.toFixed(1)}</span>
                 </h2>
-                <button className="btn btn-outline px-6 md:px-10 py-2 text-sm md:text-base">Pay</button>
+
+                {cart.length ? <Link to='/dashboard/reservation'>
+                    <button className="btn btn-outline px-6 md:px-10 py-2 text-sm md:text-base">Pay</button>
+                </Link> : <button disabled className="btn btn-outline px-6 md:px-10 py-2 text-sm md:text-base">Pay</button>}
+
             </div>
 
             {/* Table Section */}
