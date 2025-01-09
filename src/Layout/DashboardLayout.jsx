@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { Outlet, NavLink } from 'react-router-dom';
 import { FaShoppingCart, FaHome, FaClipboardCheck, FaHistory, FaStar, FaTicketAlt, FaMoon, FaSun, FaBars } from 'react-icons/fa'; // Icons
 import useTheme from '../Hook/useTheme';
+import useAdmin from '../Hook/useAdmin';
 
 const DashboardLayout = () => {
 
     //TODO: get isADmin value from the databse
-    const isAdmin = true;
+    const [isAdmin] = useAdmin();
 
     const [isSidebarOpen, setSidebarOpen] = useState(false); // Sidebar toggle state
     const { theme, toggleTheme } = useTheme(); // Assuming `useTheme` handles dark/light mode
@@ -88,7 +89,7 @@ const DashboardLayout = () => {
                                         }`
                                     }
                                 >
-                                    <FaStar size={20} /> All Users
+                                    <FaStar size={20} /> Manage Users
                                 </NavLink>
                             </li>
 

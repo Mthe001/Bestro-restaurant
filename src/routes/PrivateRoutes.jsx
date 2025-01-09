@@ -1,9 +1,9 @@
-import { useContext } from "react";
-import { Authcontext } from "../Provider/AuthProvider";
+
 import { Navigate, useLocation } from "react-router-dom";
+import useAuth from "../Hook/useAuth";
 
 const PrivateRoutes = ({ children }) => {
-    const { user, loading } = useContext(Authcontext);
+    const { user, loading } = useAuth();
     const location = useLocation(); // Get the current location
 
     // While loading, show a loading indicator

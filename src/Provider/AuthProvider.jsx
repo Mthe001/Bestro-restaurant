@@ -9,6 +9,7 @@ import {
     createUserWithEmailAndPassword,
     updateProfile, // Import updateProfile
 } from "firebase/auth";
+import useAxiosPublic from "../Hook/useAxiosPublic";
 
 export const Authcontext = createContext();
 
@@ -16,7 +17,7 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null); // To store authenticated user
     const [loading, setLoading] = useState(true); // To manage loading state
     const [error, setError] = useState(null); // To store authentication errors
-
+    const axiosPublic = useAxiosPublic();
     const googleProvider = new GoogleAuthProvider(); // Google Auth Provider
 
     // Sign in with Email and Password
@@ -95,15 +96,38 @@ const AuthProvider = ({ children }) => {
         }
     };
 
+
+
+
+
+
     // Monitor auth state changes (user login/logout)
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser); // Update user state
+
+            if (currentUser) {
+                //get token and store client
+                const userInfo = { email: currentUser.email };
+                axiosPublic.post('/jwt', userInfo)
+                    .then(res => {
+                        if (res.data.token) {
+                            localStorage.setItem('access-token', res.data.token);
+                        }
+                    })
+
+            } else {
+                //TODO: remove token (if token stored in the client side : LOCAL storage, caching , in memory)
+
+                localStorage.removeItem('access-token');
+            }
+
+
             setLoading(false); // Stop loading when user state is resolved
         });
 
         return () => unsubscribe(); // Cleanup subscription on unmount
-    }, []);
+    }, [axiosPublic]);
 
     const authInfo = {
         user, // Authenticated user
